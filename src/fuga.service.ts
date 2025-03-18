@@ -6,7 +6,7 @@ export class FugaService {
   private readonly logger: Logger = new Logger('FugaService');
   private status: string = 'loading';
 
-  constructor(/*private readonly hogeService: HogeService*/) {
+  constructor(private readonly hogeService: HogeService) {
     this.logger.log('loading...');
     setTimeout(() => {
       this.status = 'ready';
@@ -19,7 +19,7 @@ export class FugaService {
   }
 
   getHogeFromHogeService(): string {
-    return 'got: ' /*+ this.hogeService.getHoge()*/;
+    return 'got: ' + this.hogeService.getHoge();
   }
 
   getStatus(): string {
