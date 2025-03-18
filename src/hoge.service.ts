@@ -1,15 +1,15 @@
-import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
 import { FugaService } from './fuga.service';
 
 @Injectable()
 export class HogeService {
   private readonly logger: Logger = new Logger('HogeService');
+  private readonly fugaService: FugaService;
   private status: string = 'loading';
 
-  constructor(
-    @Inject(forwardRef(() => FugaService))
-    private readonly fugaService: FugaService,
-  ) {
+  constructor(private moduleRef: ModuleRef) {
+    this.fugaService = this.moduleRef.get(FugaService);
     this.logger.log('loading...');
     setTimeout(() => {
       this.status = 'ready';
