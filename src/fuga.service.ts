@@ -4,11 +4,7 @@ import { HogeService } from './hoge.service';
 @Injectable()
 export class FugaService {
   private readonly logger: Logger = new Logger('FugaService');
-  private readonly data: {
-    status: string;
-  } = {
-    status: 'loading',
-  };
+  private status: string = 'loading';
 
   constructor(
     @Inject(forwardRef(() => HogeService))
@@ -16,7 +12,7 @@ export class FugaService {
   ) {
     this.logger.log('loading...');
     setTimeout(() => {
-      this.data.status = 'ready';
+      this.status = 'ready';
       this.logger.log('load completed!');
     }, 1000);
   }
@@ -30,6 +26,6 @@ export class FugaService {
   }
 
   getStatus(): string {
-    return this.data.status;
+    return this.status;
   }
 }
